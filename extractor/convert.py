@@ -2,7 +2,7 @@
 TODO: 
 - configure PDF parser (adjust size & also specify columns)
 """
-from typing import Dict, Tuple
+from typing import Dict, Tuple, Optional
 from pathlib import Path
 import numpy as np
 import camelot
@@ -21,14 +21,14 @@ DOC_CONFIG: dict = {
 
 
 class PDFConverter:
-    """ Turn PDF into CSV file """
+    """Turn PDF into CSV file"""
 
     def __init__(self, doc_type: str, doc_path: Path, doc_config: dict = DOC_CONFIG):
         self.doc_type: str = doc_type
         self.doc_path: Path = doc_path
         self.data: list = []
-        self.pages: TableList = None
-        self.page_count: int = None
+        self.pages: Optional[TableList] = None
+        self.page_count: Optional[int] = None
         self._config: Dict = doc_config[self.doc_type]
 
     def _read(self):
@@ -44,7 +44,7 @@ class PDFConverter:
         return data
 
     def process(self) -> Tuple:
-        data: pd.DataFrame = pd.DataFrame()
+        data: list = []
         metrics: dict = {}
         try:
             self._read()
@@ -53,9 +53,9 @@ class PDFConverter:
 
         if self.pages is not None:
             for idx, page in enumerate(self.pages):
-                data = self._process_page(page)
+                data.append(self._process_page(page))
                 metrics.update({idx: page.parsing_report})
-        return pd.concat(self.parsing_reports), pd.DataFrame(metrics).T
+        return pd.concat(metrics), pd.DataFrame(metrics).T
 
     def export(self):
         pass
