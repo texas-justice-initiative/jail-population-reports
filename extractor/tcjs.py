@@ -23,7 +23,7 @@ class TCJSConnection:
         # function to create paths if DNE
         # convert data date to month/year format
 
-        output_file: Path = Path.cwd() / "warehouse/data/pdf/2021/09"
+        output_file: Path = Path.cwd() / "data/pdf/2021/09"
 
         with open(output_file / f"{file_slug}.pdf", "wb") as output_file:
             file_contents: requests.Response = requests.get(
