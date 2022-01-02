@@ -14,7 +14,7 @@ import os
 from extractor.convert import DOC_CONFIG, PDFConverter
 
 
-ASSET_PATH: Path = Path.cwd().parent / "assets"
+ASSET_PATH: Path = Path(__file__).parent.parent / "assets"
 
 
 @pytest.fixture(autouse=True)
