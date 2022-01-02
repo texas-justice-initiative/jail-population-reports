@@ -39,7 +39,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
 
       - name: Code Quality
-        run: poetry run black . --check
+        run: poetry run black extractor/ --check
 
       - name: Test with pytest
         run: poetry run pytest --cov extractor/ --cov-config=extractor/.coveragerc -n 2
