@@ -1,4 +1,4 @@
-from datetime import datetime
+import os
 from pathlib import Path
 
 import requests  # type: ignore
@@ -18,16 +18,25 @@ class TCJSConnection:
     # def list_files(file_slug: str, start: datetime, end: datetime) -> None:
     #     pass
 
-    def download(self, file_slug: str, data_date: datetime, output: Path) -> None:
+    @staticmethod
+    def _initialize(output_path: Path):
+        os.makedirs(output_path, exist_ok=True)
+
+    def download(
+        self, document_type: str, data_year: str, data_month: str, data_path: Path
+    ) -> None:
         # TODO:
         # function to create paths if DNE
         # convert data date to month/year format
 
-        output_file: Path = Path.cwd() / "data/pdf/2021/09"
+        output_path: Path = (
+            Path.cwd() / f"data/{data_year}/{data_month}/{document_type}"
+        )
+        self._initialize(output_path)
 
-        with open(output_file / f"{file_slug}.pdf", "wb") as write_file:
+        with open(output_path / "raw.pdf", "wb") as write_file:
             file_contents: requests.Response = requests.get(
-                f"{BASE_URL}/2021/09/{FILENAMES[file_slug]}"
+                f"{BASE_URL}/{data_year}/{data_month.zfill(2)}/{FILENAMES[document_type]}"
             )
             # if file_contents.status_code == '200':
             #     # add log message
