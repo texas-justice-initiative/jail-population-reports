@@ -2,6 +2,10 @@ name: Data Scraping/Processing CLI CI
 
 on: [push]
 
+defaults:
+  run:
+    working-directory: extractor
+
 jobs:
 
   test:
@@ -35,11 +39,11 @@ jobs:
           poetry config virtualenvs.path ~/.virtualenvs
 
       - name: Install Dependencies
-        run: cd extractor && poetry install
+        run: poetry install
         if: steps.cache.outputs.cache-hit != 'true'
 
       - name: Code Quality
-        run: cd extractor && poetry run black . --check
+        run: poetry run black . --check
 
       - name: Test with pytest
-        run: cd extractor && poetry run pytest --cov . --cov-config=.coveragerc -n 2
+        run: poetry run pytest --cov . --cov-config=.coveragerc -n 2
