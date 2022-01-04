@@ -4,8 +4,8 @@ SELECT
     , "1" AS inmate_count
     , "2" AS inmate_days
     , "3" AS cost
-    , src.report_date
-    , src.processed_at
+    , to_date(src.report_date::varchar(255), 'YYYYMM') AS report_date
+    , to_timestamp(src.processed_at, 'YYYY-MM-DD HH:MI:SS') AS processed_at
     , dd.data_date
 FROM {{ source('tcjs_jail_population_report', 'immigrant_inmates') }} AS src
 LEFT JOIN {{ ref('immigrant_data_date') }} AS dd
