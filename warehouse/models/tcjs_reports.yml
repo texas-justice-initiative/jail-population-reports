@@ -1,0 +1,86 @@
+version: 2
+
+sources:
+  - name: tcjs_jail_population_report
+    description: Raw data converted from monthly jail population report from TCJS
+    database: warehouse
+    schema: raw
+    loader: python-extractor
+    loaded_at_field: processed_at
+
+    # freshness:
+    #   warn_after: 30
+
+    tables:
+      - name: jail_population
+        identifier: jail_population_raw
+        description: Report on jail populations by county
+
+        # columns:
+        #   - name: '0'
+        #   - name: 1
+        #   - name: 2
+        #   - name: 3
+        #   - name: 4
+        #   - name: 5
+        #   - name: 6
+        #   - name: 7
+        #   - name: 8
+        #   - name: 9
+        #   - name: 10
+        #   - name: 11
+        #   - name: 12
+        #   - name: 13
+        #   - name: 14
+        #   - name: 15
+        #   - name: 16
+        #   - name: 17
+        #   - name: 18
+        #   - name: 19
+        #   - name: 20
+        #   - name: processed_at
+        #   - name: report_date
+
+      - name: jail_population_metrics
+        identifier: jail_population_metrics
+        description: Metrics on PDF to CSV conversion
+
+        columns:
+          - name: accuracy
+          - name: whitespace
+          - name: order
+          - name: page
+          - name: processed_at
+          - name: report_date
+
+      - name: pregnant_inmates
+        identifier: pregnancies_raw
+        description: Report on pregnant inmates by county
+
+      - name: pregnancies_metrics
+        identifier: pregnancies_metrics
+        description: Metrics on PDF to CSV conversion
+
+        columns:
+          - name: accuracy
+          - name: whitespace
+          - name: order
+          - name: page
+          - name: processed_at
+          - name: report_date
+
+      - name: immigrant_inmates
+        identifier: immigration_raw
+        description: Report on immigrant inmates by county
+
+      - name: immigration_metrics
+        identifier: immigration_metrics
+        description: Metrics on PDF to CSV conversion
+
+        columns:
+          - name: accuracy
+          - name: whitespace
+          - name: order
+          - name: page
+          - name: processed_at
+          - name: report_date
