@@ -64,18 +64,22 @@ class PDFConverter:
         )
         self.page_count = self.pages.n
 
-    def _process_page(self, page: Table):
+    def _process_page(self, page: Table, document_id: str):
         data = page.df[self._config["start_row"] :]
         data.replace("", np.nan, inplace=True)
         if not self._config["null_threshold"]:
             data.dropna(thresh=self._config["null_threshold"], inplace=True)
         data["processed_at"] = self._processed_at
         data["report_date"] = self._data_date
+        data["document_id"] = document_id
+        data["source_filename"] = self.doc_path.parts[-1]
         return data
 
     def _process(self) -> Tuple:
         data: list = []
         metrics: dict = {}
+        document_id: str = uuid4().hex
+
         try:
             self._read()
         except FileNotFoundError:
@@ -83,10 +87,12 @@ class PDFConverter:
 
         if self.pages is not None:
             for idx, page in enumerate(self.pages):
-                data.append(self._process_page(page))
+                data.append(self._process_page(page, document_id))
                 parse_report: pd.DataFrame = page.parsing_report
                 parse_report["processed_at"] = self._processed_at
                 parse_report["report_date"] = self._data_date
+                parse_report["document_id"] = document_id
+                parse_report["source_filename"] = self.doc_path.parts[-1]
                 metrics.update({idx: parse_report})
         return pd.concat(data), pd.DataFrame(metrics).T
 
