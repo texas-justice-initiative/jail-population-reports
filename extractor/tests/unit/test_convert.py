@@ -1,5 +1,5 @@
 """
-Confirm converter extracts two CSVs: 
+Confirm converter extracts two CSVs:
 - Raw data from PDF
     - And characteristics on output PDF matches current config values (ie, page number, has total, start row, etc)
 - Metrics on PDF conversion accuracy

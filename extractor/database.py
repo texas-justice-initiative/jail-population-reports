@@ -14,12 +14,14 @@ class DatabaseConnection:
         """
         for data_type in ["metrics", "raw"]:
             # load data csv to dataframe
-            df = pd.read_csv(data_path / f"{data_type}.csv")
+            for csv in data_path.glob(f"{data_type}*.csv"):
+                df = pd.read_csv(csv)
 
-            # load data df to RDS db
-            df.to_sql(
-                name=f"{document_type}_{data_type}",
-                con=self._db,
-                if_exists="append",
-                index=False,
-            )
+                # load data df to RDS db
+                df.to_sql(
+                    name=f"{document_type}_{data_type}",
+                    con=self._db,
+                    schema="raw",
+                    if_exists="append",
+                    index=False,
+                )

@@ -1,9 +1,11 @@
 """
-TODO: 
+TODO:
 - configure PDF parser (adjust size & also specify columns)
 """
 from typing import Dict, Tuple, Optional
 from pathlib import Path
+
+from uuid import uuid4
 import numpy as np
 import camelot
 from camelot.core import Table, TableList
@@ -11,6 +13,8 @@ import pandas as pd
 import pendulum
 
 # replace with config object that loads doc config info in extractor /config directory
+# remove this config; only do config for downloading and then serious incidents (manual: true)
+# add logic to try and then skip when pdf not available
 DOC_CONFIG: dict = {
     "jail_population": {
         "start_row": 6,
@@ -25,6 +29,12 @@ DOC_CONFIG: dict = {
         "has_totals": True,
     },
     "pregnancies": {
+        "start_row": 0,
+        "null_threshold": False,
+        "include_final_row": True,
+        "has_totals": True,
+    },
+    "serious_incidents": {
         "start_row": 0,
         "null_threshold": False,
         "include_final_row": True,
@@ -81,7 +91,9 @@ class PDFConverter:
         return pd.concat(data), pd.DataFrame(metrics).T
 
     def _export(self, data: pd.DataFrame, output_type: str) -> None:
-        data.to_csv(self.doc_path.parent / f"{output_type}.csv", index=False)
+        data.to_csv(
+            self.doc_path.parent / f"{output_type}_{uuid4().hex}.csv", index=False
+        )
 
     def convert(self) -> None:
         raw_data, metrics = self._process()

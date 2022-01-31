@@ -2,6 +2,7 @@ import click
 from pathlib import Path
 import os
 import datetime
+from typing import List
 
 import dotenv
 import sqlalchemy as sa
@@ -20,7 +21,9 @@ postgres_engine = sa.create_engine(
 @click.command()
 @click.option(
     "--report-type",
-    type=click.Choice(["jail_population", "pregnancies", "immigration"]),
+    type=click.Choice(
+        ["jail_population", "pregnancies", "immigration", "serious_incidents"]
+    ),
 )
 @click.option("--download", is_flag=True)
 @click.option("--convert", is_flag=True)
@@ -28,7 +31,12 @@ postgres_engine = sa.create_engine(
 @click.option("--date-start", type=click.DateTime(formats=["%Y%m"]), default="202112")
 @click.option("--date-end", type=click.DateTime(formats=["%Y%m"]), default="202201")
 def extract(report_type, download, convert, load, date_start, date_end):
-    reports: list = ["jail_population", "pregnancies", "immigration"]
+    reports: list = [
+        "jail_population",
+        "pregnancies",
+        "immigration",
+        "serious_incidents",
+    ]
     if report_type is not None:
         reports = [report_type]
 
@@ -44,27 +52,39 @@ def extract(report_type, download, convert, load, date_start, date_end):
 
         for report in reports:
             click.echo(f"Processing {report} | {report_year}{report_month}")
-            if download:
+            if download and report != "serious_incidents":
                 click.echo("Downloading PDF")
                 TCJSConnection().download(
                     document_type=report,
                     data_year=report_year,
                     data_month=report_month,
-                    data_path=Path("./data"),
+                    data_path=Path("../data"),
                 )
 
             if convert:
                 click.echo("Converting PDF to CSV")
-                PDFConverter(
-                    document_type=report,
-                    data_path=Path(
-                        f"./data/{report_year}/{report_month}/{report}/raw.pdf"
-                    ),
-                ).convert()
+
+                if report == "serious_incidents":
+                    data_paths: List[Path] = Path(
+                        f"../data/{report}/{report_year}/"
+                    ).glob("*.pdf")
+                else:
+                    data_paths = list(
+                        Path(f"../data/{report_year}/{report_month}/{report}/").glob(
+                            "*.pdf"
+                        )
+                    )
+                for path in data_paths:
+                    PDFConverter(document_type=report, data_path=path).convert()
 
             if load:
                 click.echo("Loading CSV to data warehouse")
+                if report == "serious_incidents":
+                    data_path: List[Path] = Path(f"../data/{report}/{report_year}/")
+                else:
+                    data_path = Path(f"../data/{report_year}/{report_month}/{report}/")
+
                 DatabaseConnection(engine=postgres_engine).load(
-                    data_path=Path(f"./data/{report_year}/{report_month}/{report}"),
+                    data_path=data_path,
                     document_type=report,
                 )

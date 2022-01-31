@@ -38,6 +38,8 @@ class TCJSConnection:
             file_contents: requests.Response = requests.get(
                 f"{BASE_URL}/{data_year}/{data_month.zfill(2)}/{FILENAMES[document_type]}"
             )
-            # if file_contents.status_code == '200':
-            #     # add log message
+        if file_contents.status_code == "200":
+            # add log message
             write_file.write(file_contents.content)
+        else:
+            raise FileNotFoundError("Document not available for specified date")

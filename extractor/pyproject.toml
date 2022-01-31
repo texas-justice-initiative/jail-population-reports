@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "extractor"
-version = "0.0.1"
+version = "0.1.0"
 description = "Download and parse PDFs from TCJS website and load to data warehouse"
 authors = ["elaine ayo <projects@elaineayo.com>"]
 
 [tool.poetry.scripts]
-loader = 'extractor.cli:extract'
+extract = 'cli:extract'
 
 [tool.poetry.dependencies]
 python = "^3.9.0"
