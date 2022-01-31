@@ -84,3 +84,19 @@ sources:
           - name: page
           - name: processed_at
           - name: report_date
+
+      - name: serious_incidents
+        identifier: serious_incidents_raw
+        description: Report on serious incidents by county
+
+      - name: serious_incidents_metrics
+        identifier: serious_incidents_metrics
+        description: Metrics on PDF to CSV conversion
+
+        columns:
+          - name: accuracy
+          - name: whitespace
+          - name: order
+          - name: page
+          - name: processed_at
+          - name: report_date

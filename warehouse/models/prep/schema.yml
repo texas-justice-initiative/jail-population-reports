@@ -103,3 +103,43 @@ models:
     - name: report_date
     - name: data_date
       description: The date printed on the top of the report (sometimes different from date path saved under)
+
+  - name: serious_incidents_data_date
+    columns:
+    - name: data_date
+      description: The date printed on the top of the report (sometimes different from date path saved under)
+    - name: processed_at
+
+  - name: serious_incidents_county
+    columns:
+    - name: county_name
+    - name: p_code
+    - name: suicide_count
+    - name: attempted_suicide_count
+    - name: death_in_custody_count
+    - name: escape_count
+    - name: assault_count
+    - name: sexual_assault_count
+    - name: serious_injury_count
+      description: Serious bodily injury
+    - name: use_of_force_count
+      description: Incidents where use of force resulted in bodily injury
+    - name: processed_at
+    - name: data_date
+      description: The date printed on the top of the report (sometimes different from date path saved under)
+
+  - name: serious_incidents_total
+    columns:
+    - name: suicide_count
+    - name: attempted_suicide_count
+    - name: death_in_custody_count
+    - name: escape_count
+    - name: assault_count
+    - name: sexual_assault_count
+    - name: serious_injury_count
+      description: Serious bodily injury
+    - name: use_of_force_count
+      description: Incidents where use of force resulted in bodily injury
+    - name: processed_at
+    - name: data_date
+      description: The date printed on the top of the report (sometimes different from date path saved under)
