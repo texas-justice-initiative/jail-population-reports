@@ -1,0 +1,24 @@
+version: 2
+
+seeds:
+  - name: jail
+    config:
+      schema: meta
+      column_types: {fips_code: varchar, zip_code: varchar}
+    description: Metadata on Texas County Jails
+    columns:
+      - name: jail_name
+      - name: address
+      - name: city
+      - name: zip_code
+      - name: fips_code
+  - name: county
+    config:
+      schema: meta
+      column_types: {fips_code: varchar}
+    description: Name and FIPS code for Texas counties
+    columns:
+      - name: county_name
+      - name: fips_code
+      - name: county_population
+        description: County population as recorded in 2020 Census

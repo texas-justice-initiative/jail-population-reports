@@ -35,8 +35,9 @@ apply_dbt_builtins = true
 
 [tool.poetry.dependencies]
 python = "^3.9.0"
-dbt = "0.20.2"
+dbt-core = "1.0.1"
 zipp = "^3.5.0"
+dbt-postgres = "^1.0.1"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.4.0"
