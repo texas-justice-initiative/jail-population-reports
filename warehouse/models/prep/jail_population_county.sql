@@ -21,7 +21,7 @@ SELECT
     , "17" AS total_capacit4
     , "18" AS pct_capacity
     , "19" AS available_beds
-    , TO_TIMESTAMP(processed_at, 'YYYY-MM-DD HH:MI:SS') AS processed_at
+    , TO_TIMESTAMP(processed_at, 'YYYY-MM-DD HH24:MI:SS') AS processed_at
 FROM {{ source('tcjs_jail_population_report', 'jail_population') }}
 WHERE
     (

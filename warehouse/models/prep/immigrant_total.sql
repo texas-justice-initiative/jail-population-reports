@@ -3,7 +3,7 @@ SELECT
     , "2" AS inmate_days
     , "3" AS cost
     , TO_DATE(src.report_date::varchar(255), 'YYYYMM') AS report_date
-    , TO_TIMESTAMP(src.processed_at, 'YYYY-MM-DD HH:MI:SS') AS processed_at
+    , TO_TIMESTAMP(src.processed_at, 'YYYY-MM-DD HH24:MI:SS') AS processed_at
     , dd.data_date
 FROM {{ source('tcjs_jail_population_report', 'immigrant_inmates') }} AS src
 LEFT JOIN {{ ref('immigrant_data_date') }} AS dd

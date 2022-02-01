@@ -7,11 +7,11 @@ SELECT
     , "6"::numeric AS sexual_assault_count
     , "7"::numeric AS serious_injury_count
     , "8"::numeric AS use_of_force_count
-    , to_timestamp(src.processed_at, 'YYYY-MM-DD HH:MI:SS') AS processed_at
+    , to_timestamp(src.processed_at, 'YYYY-MM-DD HH24:MI:SS') AS processed_at
     , dd.data_date
 FROM {{ source('tcjs_jail_population_report', 'serious_incidents') }} AS src
 LEFT JOIN {{ ref('serious_incidents_data_date') }} AS dd
     ON dd.processed_at = src.processed_at
-        AND dd.report_date = src.report_date
+        AND dd.document_id = src.document_id
 WHERE
     "0" = 'Totals'

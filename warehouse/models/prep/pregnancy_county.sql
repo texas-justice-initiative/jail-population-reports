@@ -3,6 +3,6 @@ SELECT
     , SPLIT_PART(county_name, '(', 1) AS county_name
     , COALESCE(SPLIT_PART(county_name, '(', 2) = 'P)', FALSE) AS p_code
     , pregnant_female_count
-    , TO_TIMESTAMP(processed_at, 'YYYY-MM-DD HH:MI:SS') AS processed_at
+    , TO_TIMESTAMP(processed_at, 'YYYY-MM-DD HH24:MI:SS') AS processed_at
 FROM {{ref('pregnancy_base')}}
 WHERE county_name NOT LIKE '%Total%'

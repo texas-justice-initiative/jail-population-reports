@@ -17,12 +17,12 @@ SELECT
         WHEN "13"::numeric IS NOT NULL THEN "13"::numeric ELSE "7"::numeric
     END AS serious_injury_count
     , CASE WHEN "14"::numeric IS NULL THEN "15"::numeric ELSE "8"::numeric END AS use_of_force_count
-    , to_timestamp(src.processed_at, 'YYYY-MM-DD HH:MI:SS') AS processed_at
+    , to_timestamp(src.processed_at, 'YYYY-MM-DD HH24:MI:SS') AS processed_at
     , dd.data_date
 FROM {{ source('tcjs_jail_population_report', 'serious_incidents') }} AS src
 LEFT JOIN {{ ref('serious_incidents_data_date') }} AS dd
     ON dd.processed_at = src.processed_at
-        AND dd.report_date = src.report_date
+        AND dd.document_id = src.document_id
 WHERE
     "0" IS NOT NULL AND "14" IS NULL
     AND "0" NOT LIKE 'Totals'
