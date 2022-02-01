@@ -9,14 +9,22 @@ SELECT
         WHEN "5"::numeric IS NULL THEN "6"::numeric ELSE "3"::numeric
     END AS death_in_custody_count
     , CASE WHEN "7"::numeric IS NULL THEN "8"::numeric ELSE "4"::numeric END AS escape_count
-    , CASE WHEN "9"::numeric IS NULL THEN "2"::numeric ELSE "5"::numeric END AS assault_count
     , CASE
-        WHEN "11"::numeric IS NULL THEN "2"::numeric ELSE "6"::numeric
+        WHEN "9"::numeric IS NULL AND "10"::numeric IS NOT NULL THEN "10"::numeric ELSE "5"::numeric
+    END AS assault_count
+    , CASE
+        WHEN
+            "11"::numeric IS NULL AND "12"::numeric IS NOT NULL THEN "12"::numeric
+        ELSE "6"::numeric
     END AS sexual_assault_count
     , CASE
         WHEN "13"::numeric IS NOT NULL THEN "13"::numeric ELSE "7"::numeric
     END AS serious_injury_count
-    , CASE WHEN "14"::numeric IS NULL THEN "15"::numeric ELSE "8"::numeric END AS use_of_force_count
+    , CASE
+        WHEN
+            "14"::numeric IS NULL AND "15"::numeric IS NOT NULL THEN "15"::numeric
+        ELSE "8"::numeric
+    END AS use_of_force_count
     , to_timestamp(src.processed_at, 'YYYY-MM-DD HH24:MI:SS') AS processed_at
     , dd.data_date
 FROM {{ source('tcjs_jail_population_report', 'serious_incidents') }} AS src
