@@ -8,10 +8,10 @@ profile: tji_warehouse
 # These configurations specify where dbt should look for different types of files.
 # The `source-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
-source-paths: ["models"]
+model-paths: ["models"]
 analysis-paths: ["analysis"]
 test-paths: ["tests"]
-data-paths: ["data"]
+seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
@@ -34,18 +34,3 @@ models:
                 +persist_docs:
                     relation: true
                     columns: true
-
-seeds:
-    warehouse:
-        +schema: static
-        lookup:
-            +enable: True
-            +schema: lookup
-            +quoting:
-                database: false
-                schema: false
-                identifier: false
-            +full_refresh: True
-            # +column_types:
-            #     id: int
-            #     display_text: varchar(32)
