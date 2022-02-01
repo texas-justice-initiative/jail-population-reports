@@ -5,7 +5,7 @@ Scraping/Extracting data from TJI
 ### Setup
 
 There are two distinct batches of code housed in this repository:
-    
+
   - A tool for downloading, parsing, and uploading TCJS data
 
   - Configuration for the data warehouse and the code to generate the downstream cleaned versions of the TCJS reports
