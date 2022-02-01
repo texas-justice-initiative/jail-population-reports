@@ -5,9 +5,10 @@ Scraping/Extracting data from TJI
 ### Setup
 
 There are two distinct batches of code housed in this repository:
-    - A tool for downloading, parsing, and uploading TCJS data
 
-    - Configuration for the data warehouse and the code to generate the downstream cleaned versions of the TCJS reports
+  - A tool for downloading, parsing, and uploading TCJS data
+
+  - Configuration for the data warehouse and the code to generate the downstream cleaned versions of the TCJS reports
 
 You will need to set up an environment for working on each of these projects.
 
@@ -42,4 +43,4 @@ tji_warehouse: # this needs to match the profile: in your dbt_project.yml file
 
 To generate the SQL used to build the database, use `dbt compile`; to create or update the tables themeselves, run `dbt run`
 
-More info (here)[https://docs.getdbt.com/tutorial/setting-up].
+More info [here](https://docs.getdbt.com/tutorial/setting-up).
