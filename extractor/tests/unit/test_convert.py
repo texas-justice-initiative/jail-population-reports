@@ -11,7 +11,7 @@ import pandas as pd
 import pendulum
 import pytest
 import os
-from extractor.convert import DOC_CONFIG, PDFConverter
+from extractor.extractor.convert import DOC_CONFIG, PDFConverter
 
 
 ASSET_PATH: Path = Path(__file__).parent.parent / "assets"
