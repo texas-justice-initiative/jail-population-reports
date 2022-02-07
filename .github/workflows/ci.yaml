@@ -30,4 +30,4 @@ jobs:
         run: poetry run black . --check
       - name: Run Tests/Coverage
         # run: poetry run pytest --cov . --cov-config=.coveragerc -n 2
-        run: poetry run ls
+        run: poetry run extract --help
