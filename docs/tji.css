@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+@import url('images/tji_logo_small.png');
 .logo {
-    background-image: url(https://texasjusticeinitiative.org/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fimages%2Ftji-logo.77f3d14a15129745a257b50f84f4b4ab.svg&w=750&q=75);
+    background-image: url('images/tji_logo_small.png');
     background-repeat: no-repeat;
     background-color: transparent;
+    max-height: 100%;
 }
 img.logo {
-    display: none ;
+    display: none;
 }
 body {
     font-family: 'Source Sans Pro' !important;
