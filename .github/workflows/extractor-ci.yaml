@@ -1,4 +1,4 @@
-name: Scraping/Loading Tools CI
+name: Extractor Tools CI
 
 on: [pull_request]
 
