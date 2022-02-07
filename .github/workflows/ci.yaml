@@ -29,5 +29,4 @@ jobs:
       - name: Code Quality
         run: poetry run black . --check
       - name: Run Tests/Coverage
-        # run: poetry run pytest --cov . --cov-config=.coveragerc -n 2
-        run: poetry run extract --help
+        run: poetry run pytest --cov . --cov-config=.coveragerc -n 2
