@@ -1,0 +1,55 @@
+# add dbt pre-commit hooks: https://github.com/offbi/pre-commit-dbt
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+    -   id: check-added-large-files
+        args: ['--maxkb=5000']
+# -   repo: https://github.com/ambv/black
+#     rev: stable
+#     hooks:
+#     - id: black
+#       language_version: python3.7.2
+# -   repo: https://github.com/pre-commit/mirrors-autopep8
+#     rev: v1.5.2
+#     hooks:
+#     -   id: autopep8
+# -   repo: https://github.com/pre-commit/mirrors-mypy
+#     rev: v0.770
+#     hooks:
+#     -   id: mypy
+# -   repo: https://github.com/pryorda/dockerfilelint-precommit-hooks
+#     rev: v0.1.0
+#     hooks:
+#     -   id: dockerfilelint
+# -   repo: https://github.com/IamTheFij/docker-pre-commit
+#     rev: v1.0.1
+#     hooks:
+#     -   id: docker-compose-check
+# -   repo: https://github.com/tchoedak/pre-commit-sql-format
+#     rev: latest
+#     hooks:
+#     -   id: format-sql
+# -   repo: https://github.com/offbi/pre-commit-dbt
+#     rev: v1.0.0
+#     hooks:
+#     -  id: dbt-clean
+#     -  id: dbt-deps
+#     -  id: dbt-docs-generate
+#     -  id: check-script-semicolon
+#     -  id: check-script-has-no-table-name
+#     -  id: check-model-columns-have-desc
+#        files: ^models/clean
+#     -  id: check-model-columns-have-desc
+#        files: ^models/prep
+-   repo: https://github.com/sqlfluff/sqlfluff
+    rev: 0.6.5
+    hooks:
+#     -  id: sqlfluff-lint
+#        # For dbt projects, this installs the dbt "extras":
+#        additional_dependencies: ['.[dbt]']
+    -  id: sqlfluff-fix
+       additional_dependencies: ['.[dbt]']

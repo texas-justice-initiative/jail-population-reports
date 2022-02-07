@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "extractor"
+version = "0.1.0"
+description = "Download and parse PDFs from TCJS website and load to data warehouse"
+authors = ["elaine ayo <projects@elaineayo.com>"]
+
+[tool.poetry.scripts]
+extract = 'extractor.cli:extract'
+
+[tool.poetry.dependencies]
+python = "^3.9.0"
+click = "^7.0"
+pandas = "^1.0.1"
+python-dotenv = "^0.11.0"
+sqlalchemy = "^1.3.18"
+psycopg2-binary = "^2.8.6"
+mashumaro = "^1.22"
+requests = "^2.25.1"
+camelot-py = {version = "*", extras = ["cv"]}
+pendulum = "*"
+types-requests = "^2.26.0"
+
+[tool.poetry.dev-dependencies]
+coverage = "^5.3"
+pytest = "^6.2.0"
+pytest-cov = "^3.0.0"
+black = "^21.10b0"
+pre-commit = "^2.4.0"
+mypy = "^0.770"
+pylint = "2.5.3"
+jupyter = "*"
+notebook = "*"
+pytest-xdist = "^2.5.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
