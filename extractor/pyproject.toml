@@ -5,7 +5,7 @@ description = "Download and parse PDFs from TCJS website and load to data wareho
 authors = ["elaine ayo <projects@elaineayo.com>"]
 
 [tool.poetry.scripts]
-extract = 'cli:extract'
+extract = 'extractor.cli:extract'
 
 [tool.poetry.dependencies]
 python = "^3.9.0"
