@@ -62,6 +62,7 @@ models:
     - name: report_date
 
   - name: pregnancy_county
+    description: Monthly pregnant inmate counts by county
     columns:
     - name: county_name
     - name: p_code
@@ -70,12 +71,14 @@ models:
     - name: report_date
 
   - name: pregnancy_total
+    description: State-level pregnant inmate count by month
     columns:
     - name: pregnant_female_count
     - name: processed_at
     - name: report_date
 
   - name: immigrant_data_date
+    description: Intermediate table to retrieve report date from parsed document
     columns:
     - name: data_date
       description: The date printed on the top of the report (sometimes different from date path saved under)
@@ -83,6 +86,7 @@ models:
     - name: report_date
 
   - name: immigrant_county
+    description: County-level counts of detained immigrants by month
     columns:
     - name: county_name
     - name: p_code
@@ -95,6 +99,7 @@ models:
       description: The date printed on the top of the report (sometimes different from date path saved under)
 
   - name: immigrant_total
+    description: State-level counts of detained immigrants by month
     columns:
     - name: inmate_count
     - name: inmate_days
@@ -105,12 +110,14 @@ models:
       description: The date printed on the top of the report (sometimes different from date path saved under)
 
   - name: serious_incidents_data_date
+    description: Intermediate table to retrieve report date from parsed document
     columns:
     - name: data_date
       description: The date printed on the top of the report (sometimes different from date path saved under)
     - name: processed_at
 
   - name: serious_incidents_county
+    description: County-level counts of serious incidents by month
     columns:
     - name: county_name
     - name: p_code
@@ -129,6 +136,7 @@ models:
       description: The date printed on the top of the report (sometimes different from date path saved under)
 
   - name: serious_incidents_total
+    description: State-level counts of detained immigrants by month
     columns:
     - name: suicide_count
     - name: attempted_suicide_count

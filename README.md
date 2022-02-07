@@ -1,6 +1,11 @@
-# Jail Population Reports
-Scraping/Extracting data from TJI
+# Jail Population Reports Data Warehouse
+Scraping/Extracting data from TCJS
 
+The objective of this project is to automatically convert PDF reports from the Texas Commission on Jail Standards into tabular data, and load that data into a modern data warehouse. TJI will use this data for various projects on our website, but this repo can be used to spin up an independent version of this data processing pipeline.
+
+The pipeline follows an Extract-Load-Transform pattern -- we load the reports in as close to their original format as possible after OCR conversion (including missing column headers). All of this cleanup is done via SQL queries, both for accessibility in terms of tools as well as for centralization/transparency of transformations applied.
+
+More information on the table structure and data elements themselves can be found on the [data documentation website](https://texas-justice-initiative.github.io/jail-population-reports/#!/overview/warehouse).
 
 ### Setup
 
