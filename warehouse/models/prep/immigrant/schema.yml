@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: immigrant_data_date
+    description: Intermediate table to retrieve report date from parsed document
+    columns:
+    - name: data_date
+      description: The date printed on the top of the report (sometimes different from date path saved under)
+    - name: processed_at
+    - name: loaded_at
+    - name: document_id
+    - name: source_filename
+
+
+  - name: immigrant_base
+    description: Base table for immigrant detainer report (combines formats, filters older data versions)
+    config:
+      materialized: incremental
+      sort: loaded_at
+    columns:
+    - name: county_name
+    - name: inmate_count
+      description: The number of individuals held in jail for immigration detainers
+    - name: inmate_days
+      description: The number of days individuals with immigration detainers are held in jail
+    - name: cost
+      description: The total cost of housing individuals with immigration detainers in jail
+    - name: processed_at
+    - name: loaded_at
+    - name: document_id
+    - name: source_filename
+
+
+  - name: immigrant_county
+    description: County-level counts of detained immigrants by month
+    columns:
+    - name: county_name
+    - name: p_code
+    - name: inmate_count
+      description: The number of individuals held in jail for immigration detainers
+    - name: inmate_days
+      description: The number of days individuals with immigration detainers are held in jail
+    - name: cost
+      description: The total cost of housing individuals with immigration detainers in jail
+    - name: processed_at
+    - name: loaded_at
+    - name: data_date
+      description: The date printed on the top of the report (sometimes different from date path saved under)
+
+  - name: immigrant_total
+    description: State-level counts of detained immigrants by month
+    columns:
+    - name: inmate_count
+      description: The number of individuals held in jail for immigration detainers
+    - name: inmate_days
+      description: The number of days individuals with immigration detainers are held in jail
+    - name: cost
+      description: The total cost of housing individuals with immigration detainers in jail
+    - name: processed_at
+    - name: loaded_at
+    - name: data_date
+      description: The date printed on the top of the report (sometimes different from date path saved under)

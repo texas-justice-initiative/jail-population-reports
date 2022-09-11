@@ -29,7 +29,7 @@ models:
                 materialized: table
                 +schema: prep
         clean:
-                materialized: table
+                materialized: view
                 +schema: clean
                 +persist_docs:
                     relation: true

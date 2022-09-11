@@ -1,0 +1,72 @@
+version: 2
+
+# need to add query to filter out duplicate data due to multiple loads
+
+models:
+  - name: jail_population_base
+    description: Base table for jail population report (combines formats, filters older data versions)
+
+  - name: jail_population_data_date
+    description: Intermediate table to retrieve report date from parsed document
+    columns:
+    - name: data_date
+      description: The date printed on the top of the report (sometimes different from date path saved under)
+    - name: processed_at
+    - name: loaded_at
+    - name: document_id
+    - name: source_filename
+
+  - name: jail_population_total
+    description: Monthly totals for jail populations report
+    columns:
+    - name: pretrial_felons
+    - name: convicted_felons
+    - name: convicted_felons_sentenced_county
+    - name: parole_violators
+    - name: parole_violators_new_charge
+    - name: pretrial_misdemeanor
+    - name: convicted_misdemeanor
+    - name: bench_warrants
+    - name: federal
+    - name: pretrial_sjf
+    - name: convicted_sjf_sentenced_county
+    - name: convicted_sjf_sentenced_state
+    - name: total_others
+    - name: total_local
+    - name: total_contract
+    - name: total_population
+    - name: total_capacity
+    - name: pct_capacity
+    - name: available_beds
+    - name: processed_at
+    - name: loaded_at
+
+  - name: jail_population_county
+    description: County-level monthly count for jail populations report
+    columns:
+    - name: county_name
+    - name: p_code
+    - name: report_date
+    - name: pretrial_felons
+    - name: convicted_felons
+    - name: convicted_felons_sentenced_county
+    - name: parole_violators
+    - name: parole_violators_new_charge
+    - name: pretrial_misdemeanor
+    - name: convicted_misdemeanor
+    - name: bench_warrants
+    - name: federal
+    - name: pretrial_sjf
+    - name: convicted_sjf_sentenced_county
+    - name: convicted_sjf_sentenced_state
+    - name: total_others
+    - name: total_local
+    - name: total_contract
+    - name: total_population
+    - name: total_capacity
+    - name: pct_capacity
+    - name: available_beds
+    - name: processed_at
+    - name: loaded_at
+    - name: document_id
+    - name: source_filename

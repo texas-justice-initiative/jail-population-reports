@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: pregnancy_base
+    description: Base table to convert side-by-side columns into long columns; this is the first step before it can be split into total/county counts
+    config:
+      materialized: incremental
+      sort: loaded_at
+    columns:
+    - name: county_name
+    - name: pregnant_female_count
+      description: Pregnant individuals booked in jail and individuals found to be pregnant in jail
+    - name: processed_at
+    - name: loaded_at
+    - name: document_id
+    - name: source_filename
+
+  - name: pregnancy_data_date
+    description: Intermediate table to retrieve report date from parsed document
+    columns:
+    - name: data_date
+      description: The date printed on the top of the report (sometimes different from date path saved under)
+    - name: processed_at
+    - name: loaded_at
+    - name: document_id
+    - name: source_filename
+
+  - name: pregnancy_county
+    description: Monthly pregnant inmate counts by county
+    columns:
+    - name: county_name
+    - name: p_code
+    - name: pregnant_female_count
+      description: Pregnant individuals booked in jail and individuals found to be pregnant in jail
+    - name: data_date
+    - name: processed_at
+    - name: loaded_at
+
+  - name: pregnancy_total
+    description: State-level pregnant inmate count by month
+    columns:
+    - name: pregnant_female_count
+      description: Pregnant individuals booked in jail and individuals found to be pregnant in jail
+    - name: data_date
+    - name: processed_at
+    - name: loaded_at

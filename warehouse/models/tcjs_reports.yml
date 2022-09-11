@@ -50,8 +50,10 @@ sources:
           - name: whitespace
           - name: order
           - name: page
+          - name: document_id
+          - name: source_filename
           - name: processed_at
-          - name: report_date
+          - name: loaded_at
 
       - name: pregnant_inmates
         identifier: pregnancies_raw
@@ -66,8 +68,10 @@ sources:
           - name: whitespace
           - name: order
           - name: page
+          - name: document_id
+          - name: source_filename
           - name: processed_at
-          - name: report_date
+          - name: loaded_at
 
       - name: immigrant_inmates
         identifier: immigration_raw
@@ -82,8 +86,10 @@ sources:
           - name: whitespace
           - name: order
           - name: page
+          - name: document_id
+          - name: source_filename
           - name: processed_at
-          - name: report_date
+          - name: loaded_at
 
       - name: serious_incidents
         identifier: serious_incidents_raw
@@ -98,5 +104,7 @@ sources:
           - name: whitespace
           - name: order
           - name: page
+          - name: document_id
+          - name: source_filename
           - name: processed_at
-          - name: report_date
+          - name: loaded_at
